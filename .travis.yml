@@ -2,19 +2,19 @@ sudo: required
 services:
   - docker
 before_install: 
-  -docker build -t chevil5/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t chevil/react-test -f ./client/Dockerfile.dev ./client
 
 
 script:
   - docker run -e CI=true USERNAME/react-test npm test
 
 after_success:
-  - docker build -t chevil5/multi-client ./client
-  - docker build -t chevil5/multi-nginx ./nginx
-  - docker build -t chevil5/multi-server ./server
-  - docker build -t chevil5/multi-worker ./worker
+  - docker build -t chevil/multi-client ./client
+  - docker build -t chevil/multi-nginx ./nginx
+  - docker build -t chevil/multi-server ./server
+  - docker build -t chevil/multi-worker ./worker
   - echo "$DOCKER_PASSWORD"| docker login -u "$DOCKER_ID" --password-stdin
-  - docker push chevil5/multi-client
-  - docker push chevil5/multi-nginx
-  - docker push chevil5/multi-server
-  - docker push chevil5/multi-worker
+  - docker push chevil/multi-client
+  - docker push chevil/multi-nginx
+  - docker push chevil/multi-server
+  - docker push chevil/multi-worker
